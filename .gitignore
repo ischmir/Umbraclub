@@ -3,8 +3,6 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
-appsettings.Development.json
-
 # Umbraco runtime files
 src/Umbraclub/umbraco/Data/TEMP/
 src/Umbraclub/umbraco/Data/*.sqlite.db
@@ -501,3 +499,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+src/Umbraclub/appsettings.Development.json
