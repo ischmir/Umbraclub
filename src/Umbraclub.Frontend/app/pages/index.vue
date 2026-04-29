@@ -8,9 +8,12 @@
       </li>
     </ul>
   </div>
+  <CardSection :cards="items" />
 </template>
 
 <script setup lang="ts">
+import CardSection from '~/components/sections/CardSection.vue';
+
 const { data, pending, error } = await useFetch('/api/test')
 const items = computed(() =>
   ((data.value as any)?.data?.cms?.items ?? []).filter((i: any) => i.id)
