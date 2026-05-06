@@ -40,6 +40,14 @@ export default defineEventHandler(async (event) => {
                           properties {
                             title
                             subtitle
+                            image {
+                              items {
+                                ... on Qbankmedia {
+                                  mediaId
+                                  imageUrl
+                                }
+                              }
+                            }
                             button {
                               title
                               url
