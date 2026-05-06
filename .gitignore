@@ -3,8 +3,27 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Umbraco runtime files
+src/Umbraclub/umbraco/Data/TEMP/
+src/Umbraclub/umbraco/Data/*.sqlite.db
+src/Umbraclub/umbraco/Data/*.sqlite.db-shm
+src/Umbraclub/umbraco/Data/*.sqlite.db-wal
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
 # dotenv files
 .env
+.env.*
+!.env.example
 
 # User-specific files
 *.rsuser
@@ -480,3 +499,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+src/Umbraclub/appsettings.Development.json
