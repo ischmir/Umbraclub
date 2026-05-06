@@ -8,14 +8,27 @@ const page = computed(() =>
 const logoText = computed(() => page.value?.properties?.logoText)
 
 const navItems = computed(() => page.value?.properties?.headerNavigation ?? [])
+const footerItems = computed(() => page.value?.properties?.footerNavigation ?? [])
 </script>
 
 <template>
-  <!-- <pre>{{ navItems }}</pre> -->
-  <div>
-    <LayoutNavbar :logo-text="logoText" :nav-items="navItems" />
-    <main>
+  <div class="layout">
+    <LayoutNavBar :logo-text="logoText" :nav-items="navItems" />
+    <main class="layout__main">
       <slot />
     </main>
+    <LayoutFooter :logo-text="logoText" :nav-items="footerItems" />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.layout {
+  background-color: $color-secondary;
+
+  &__main {
+    background-color: $color-primary;
+    border-radius: 0 0 $border-radius-element $border-radius-element;
+    overflow: hidden;
+  }
+}
+</style>

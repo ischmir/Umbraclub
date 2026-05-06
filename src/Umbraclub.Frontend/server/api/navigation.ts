@@ -36,6 +36,11 @@ export default defineEventHandler(async (event) => {
                     url
                     target
                   }
+                  footerNavigation {
+                    title
+                    url
+                    target
+                  }
                 }
               }
             }
