@@ -1,14 +1,16 @@
 <script setup lang="ts">
-const { data } = await useAsyncData('navigation', () => $fetch('/api/navigation'))
+const { data: identityData } = await useAsyncData('identity', () => $fetch('/api/identity'))
+const { data: navigationData } = await useAsyncData('navigation', () => $fetch('/api/navigation'))
 
-const page = computed(() =>
-  (data.value as any)?.data?.cms?.items?.find((i: any) => i.id)
-)
+const findSettings = (data: any) =>
+  (data as any)?.data?.cms?.items?.find((i: any) => i.properties)?.properties
 
-const logoText = computed(() => page.value?.properties?.logoText)
+const identity = computed(() => findSettings(identityData.value))
+const navigation = computed(() => findSettings(navigationData.value))
 
-const navItems = computed(() => page.value?.properties?.headerNavigation ?? [])
-const footerItems = computed(() => page.value?.properties?.footerNavigation ?? [])
+const logoText = computed(() => identity.value?.logoText)
+const navItems = computed(() => navigation.value?.headerNavigation ?? [])
+const footerItems = computed(() => navigation.value?.footerNavigation ?? [])
 </script>
 
 <template>

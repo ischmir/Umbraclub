@@ -18,19 +18,7 @@ export default defineEventHandler(async (event) => {
             items {
               ... on ClubHome {
                 id
-                name
-                createDate
-                updateDate
-                route {
-                  path
-                }
                 properties {
-                  siteTitle
-                  metaDescription
-                  logoText
-                  companyName
-                  companyEmail
-                  companyPhone
                   blocks {
                     items {
                       content {
@@ -40,27 +28,19 @@ export default defineEventHandler(async (event) => {
                           properties {
                             title
                             subtitle
-                            image {
-                              items {
-                                ... on Qbankmedia {
-                                  mediaId
-                                  imageUrl
-                                }
-                              }
-                            }
                             button {
                               title
                               url
                               target
                               linkType
                             }
-                          }
-                        }
-                        ... on CardsSection {
-                          id
-                          properties {
-                            title
-                            subtitle
+                            image {
+                              items {
+                                ... on Qbankmedia {
+                                  title
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -76,7 +56,7 @@ export default defineEventHandler(async (event) => {
   } catch (err: any) {
     throw createError({
       statusCode: err.statusCode ?? 502,
-      statusMessage: err.message ?? 'Failed to fetch from Compose',
+      statusMessage: err.message ?? 'Failed to fetch hero from Compose',
     })
   }
 })

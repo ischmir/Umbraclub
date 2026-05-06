@@ -18,16 +18,11 @@ export default defineEventHandler(async (event) => {
             items {
               ... on PageSettings {
                 properties {
-                  headerNavigation {
-                    title
-                    url
-                    target
-                  }
-                  footerNavigation {
-                    title
-                    url
-                    target
-                  }
+                  logoText
+                  companyName
+                  companyEmail
+                  companyPhone
+                  companyAddress
                 }
               }
             }
@@ -38,7 +33,7 @@ export default defineEventHandler(async (event) => {
   } catch (err: any) {
     throw createError({
       statusCode: err.statusCode ?? 502,
-      statusMessage: err.message ?? 'Failed to fetch navigation from Compose',
+      statusMessage: err.message ?? 'Failed to fetch from Compose',
     })
   }
 })

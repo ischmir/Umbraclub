@@ -1,61 +1,30 @@
 <script setup lang="ts">
 defineProps<{
-  title?: string
-  subtitle?: string
-  image?: string
+  url?: string
+  target?: string
 }>()
 </script>
 
 <template>
-  <div class="card-item" :style="image ? { backgroundImage: `url(${image})` } : {}">
-    <div class="card-item__overlay" />
-    <div class="card-item__content">
-      <h3 class="card-item__title">{{ title }}</h3>
-      <p class="card-item__subtitle">{{ subtitle }}</p>
-    </div>
-  </div>
+  <NuxtLink :to="url ?? '#'" :target="target ?? undefined" class="card-item">
+    <slot />
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
 .card-item {
-  position: relative;
-  border-radius: $border-radius-element;
-  overflow: hidden;
-  min-height: 380px;
-  background-color: $color-accent;
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: flex-end;
+  min-height: 380px;
+  background-color: $secondary-font-color;
+  border-radius: $border-radius-element;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 30%,
-      rgba(0, 0, 0, 0.75) 100%
-    );
-  }
-
-  &__content {
-    position: relative;
-    z-index: 1;
-    padding: 32px;
-    color: #ffffff;
-  }
-
-  &__title {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #ffffff;
-  }
-
-  &__subtitle {
-    font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
   }
 }
 </style>
