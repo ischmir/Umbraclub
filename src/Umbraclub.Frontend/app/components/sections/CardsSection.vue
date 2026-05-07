@@ -38,6 +38,8 @@ defineProps<{
 .cards-section {
   padding: 80px 1.5rem;
 
+  // ─── Header ─────────────────────────────────────────────────────────────────
+
   &__header {
     max-width: $max-width;
     margin: 0 auto 56px;
@@ -63,6 +65,8 @@ defineProps<{
     line-height: 1.7;
   }
 
+  // ─── Card content ───────────────────────────────────────────────────────────
+
   &__card-content {
     padding: 2rem;
     display: flex;
@@ -87,19 +91,21 @@ defineProps<{
     margin: 0;
   }
 
+  // ─── Grid ───────────────────────────────────────────────────────────────────
+
   &__grid {
     max-width: $max-width;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 
-    @media (max-width: $breakpoint-lg) {
+    @media (min-width: $breakpoint-md) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }

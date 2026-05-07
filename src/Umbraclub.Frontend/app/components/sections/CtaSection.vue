@@ -34,6 +34,8 @@ const imageSrc = computed(() => '/Umbraco-Patterns_Blue_Full.png')
 .cta-section {
   padding: 0 1.5rem 80px;
 
+  // ─── Inner ──────────────────────────────────────────────────────────────────
+
   &__inner {
     max-width: $max-width;
     margin: 0 auto;
@@ -41,6 +43,7 @@ const imageSrc = computed(() => '/Umbraco-Patterns_Blue_Full.png')
     background-size: cover;
     background-position: center;
     border-radius: $border-radius-element;
+    box-sizing: border-box;
     padding: 4rem 3.5rem;
     display: flex;
     align-items: center;

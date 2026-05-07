@@ -37,15 +37,17 @@ defineProps<{
     max-width: $max-width;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
     align-items: center;
 
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
     }
   }
+
+  // ─── Inner ──────────────────────────────────────────────────────────────────
 
   // ─── Image ──────────────────────────────────────────────────────────────────
 
