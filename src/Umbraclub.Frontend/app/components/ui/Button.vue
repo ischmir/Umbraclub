@@ -40,8 +40,8 @@ button {
   }
 
   &.secondary:hover {
-    background-color: $color-secondary;
-    color: $primary-font-color;
+    background-color: $color-accent;
+    color: $secondary-font-color;
   }
 }
 </style>

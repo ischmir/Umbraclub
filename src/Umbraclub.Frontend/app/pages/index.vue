@@ -3,12 +3,16 @@ const { data } = await useAsyncData('homepage', async () => {
   const results = await Promise.allSettled([
     $fetch('/api/hero'),
     $fetch('/api/cards'),
+    $fetch('/api/imageAndText'),
+    $fetch('/api/cta'),
   ])
   return results.map(r => r.status === 'fulfilled' ? r.value : null)
 })
 
 const heroData = computed(() => (data.value as any)?.[0])
 const cardsData = computed(() => (data.value as any)?.[1])
+const imageAndTextData = computed(() => (data.value as any)?.[2])
+const ctaData = computed(() => (data.value as any)?.[3])
 
 const findPage = (data: any) =>
   data?.data?.cms?.items?.find((i: any) => i.id)
@@ -22,6 +26,18 @@ const heroBlock = computed(() =>
 const cardsBlock = computed(() =>
   findPage(cardsData.value)?.properties?.blocks?.items?.find(
     (i: any) => i.content?.contentType === 'cardsSectionInline'
+  )?.content
+)
+
+const imageAndTextBlock = computed(() =>
+  findPage(imageAndTextData.value)?.properties?.blocks?.items?.find(
+    (i: any) => i.content?.contentType === 'imageAndTextSection'
+  )?.content
+)
+
+const ctaBlock = computed(() =>
+  findPage(ctaData.value)?.properties?.blocks?.items?.find(
+    (i: any) => i.content?.contentType === 'ctaSection'
   )?.content
 )
 
@@ -48,5 +64,16 @@ const cards = computed(() => {
     :title="cardsBlock?.properties?.title"
     :subtitle="cardsBlock?.properties?.subtitle"
     :cards="cards"
+  />
+  <SectionsImageAndTextSection
+    v-if="imageAndTextBlock"
+    :title="imageAndTextBlock?.properties?.title"
+    :bodytext="imageAndTextBlock?.properties?.bodytext"
+  />
+  <SectionsCtaSection
+    v-if="ctaBlock"
+    :title="ctaBlock?.properties?.title"
+    :subtitle="ctaBlock?.properties?.subtitle"
+    :button="ctaBlock?.properties?.button?.[0]"
   />
 </template>

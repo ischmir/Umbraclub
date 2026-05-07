@@ -15,7 +15,7 @@ const footerItems = computed(() => navigation.value?.footerNavigation ?? [])
 
 <template>
   <div class="layout">
-    <LayoutNavBar :logo-text="logoText" :nav-items="navItems" />
+    <LayoutNavbar :logo-text="logoText" :nav-items="navItems" />
     <main class="layout__main">
       <slot />
     </main>
