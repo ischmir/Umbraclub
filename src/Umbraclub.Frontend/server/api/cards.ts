@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
               ... on ClubHome {
                 id
                 properties {
-                  blocks {
+                  blockList {
                     items {
                       content {
                         contentType

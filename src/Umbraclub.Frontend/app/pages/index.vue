@@ -15,28 +15,28 @@ const imageAndTextData = computed(() => (data.value as any)?.[2])
 const ctaData = computed(() => (data.value as any)?.[3])
 
 const findPage = (data: any) =>
-  data?.data?.cms?.items?.find((i: any) => i.id)
+  data?.data?.cms?.items?.find((i: any) => i.id && i.properties?.blockList?.items?.length)
 
 const heroBlock = computed(() =>
-  findPage(heroData.value)?.properties?.blocks?.items?.find(
+  findPage(heroData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'heroSection'
   )?.content
 )
 
 const cardsBlock = computed(() =>
-  findPage(cardsData.value)?.properties?.blocks?.items?.find(
+  findPage(cardsData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'cardsSectionInline'
   )?.content
 )
 
 const imageAndTextBlock = computed(() =>
-  findPage(imageAndTextData.value)?.properties?.blocks?.items?.find(
+  findPage(imageAndTextData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'imageAndTextSection'
   )?.content
 )
 
 const ctaBlock = computed(() =>
-  findPage(ctaData.value)?.properties?.blocks?.items?.find(
+  findPage(ctaData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'ctaSection'
   )?.content
 )

@@ -18,7 +18,6 @@ export default defineEventHandler(async (event) => {
             items {
               ... on PageSettings {
                 properties {
-                  logoText
                   companyName
                   companyEmail
                   companyPhone
