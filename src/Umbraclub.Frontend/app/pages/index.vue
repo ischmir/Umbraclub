@@ -5,6 +5,7 @@ const { data } = await useAsyncData('homepage', async () => {
     $fetch('/api/cards'),
     $fetch('/api/imageAndText'),
     $fetch('/api/cta'),
+    $fetch('/api/events'),
   ])
   return results.map(r => r.status === 'fulfilled' ? r.value : null)
 })
@@ -13,6 +14,7 @@ const heroData = computed(() => (data.value as any)?.[0])
 const cardsData = computed(() => (data.value as any)?.[1])
 const imageAndTextData = computed(() => (data.value as any)?.[2])
 const ctaData = computed(() => (data.value as any)?.[3])
+const eventsData = computed(() => (data.value as any)?.[4])
 
 const findPage = (data: any) =>
   data?.data?.cms?.items?.find((i: any) => i.id && i.properties?.blockList?.items?.length)
@@ -41,6 +43,16 @@ const ctaBlock = computed(() =>
   )?.content
 )
 
+const eventsBlock = computed(() =>
+  findPage(eventsData.value)?.properties?.blockList?.items?.find(
+    (i: any) => i.content?.contentType === 'eventsSection'
+  )?.content
+)
+
+const events = computed(() =>
+  eventsBlock.value?.properties?.eventData?.items ?? []
+)
+
 const cards = computed(() => {
   const p = cardsBlock.value?.properties
   if (!p) return []
@@ -64,6 +76,12 @@ const cards = computed(() => {
     :title="cardsBlock?.properties?.title"
     :subtitle="cardsBlock?.properties?.subtitle"
     :cards="cards"
+  />
+  <SectionsEventsSection
+    v-if="eventsBlock"
+    :title="eventsBlock?.properties?.title"
+    :subtitle="eventsBlock?.properties?.subtitle"
+    :events="events"
   />
   <SectionsImageAndTextSection
     v-if="imageAndTextBlock"
