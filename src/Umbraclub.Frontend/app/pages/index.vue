@@ -3,26 +3,54 @@ const { data } = await useAsyncData('homepage', async () => {
   const results = await Promise.allSettled([
     $fetch('/api/hero'),
     $fetch('/api/cards'),
+    $fetch('/api/imageAndText'),
+    $fetch('/api/cta'),
+    $fetch('/api/events'),
   ])
   return results.map(r => r.status === 'fulfilled' ? r.value : null)
 })
 
 const heroData = computed(() => (data.value as any)?.[0])
 const cardsData = computed(() => (data.value as any)?.[1])
+const imageAndTextData = computed(() => (data.value as any)?.[2])
+const ctaData = computed(() => (data.value as any)?.[3])
+const eventsData = computed(() => (data.value as any)?.[4])
 
 const findPage = (data: any) =>
-  data?.data?.cms?.items?.find((i: any) => i.id)
+  data?.data?.cms?.items?.find((i: any) => i.id && i.properties?.blockList?.items?.length)
 
 const heroBlock = computed(() =>
-  findPage(heroData.value)?.properties?.blocks?.items?.find(
+  findPage(heroData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'heroSection'
   )?.content
 )
 
 const cardsBlock = computed(() =>
-  findPage(cardsData.value)?.properties?.blocks?.items?.find(
+  findPage(cardsData.value)?.properties?.blockList?.items?.find(
     (i: any) => i.content?.contentType === 'cardsSectionInline'
   )?.content
+)
+
+const imageAndTextBlock = computed(() =>
+  findPage(imageAndTextData.value)?.properties?.blockList?.items?.find(
+    (i: any) => i.content?.contentType === 'imageAndTextSection'
+  )?.content
+)
+
+const ctaBlock = computed(() =>
+  findPage(ctaData.value)?.properties?.blockList?.items?.find(
+    (i: any) => i.content?.contentType === 'ctaSection'
+  )?.content
+)
+
+const eventsBlock = computed(() =>
+  findPage(eventsData.value)?.properties?.blockList?.items?.find(
+    (i: any) => i.content?.contentType === 'eventsSection'
+  )?.content
+)
+
+const events = computed(() =>
+  eventsBlock.value?.properties?.eventData?.items ?? []
 )
 
 const cards = computed(() => {
@@ -48,5 +76,22 @@ const cards = computed(() => {
     :title="cardsBlock?.properties?.title"
     :subtitle="cardsBlock?.properties?.subtitle"
     :cards="cards"
+  />
+  <SectionsEventsSection
+    v-if="eventsBlock"
+    :title="eventsBlock?.properties?.title"
+    :subtitle="eventsBlock?.properties?.subtitle"
+    :events="events"
+  />
+  <SectionsImageAndTextSection
+    v-if="imageAndTextBlock"
+    :title="imageAndTextBlock?.properties?.title"
+    :bodytext="imageAndTextBlock?.properties?.bodytext"
+  />
+  <SectionsCtaSection
+    v-if="ctaBlock"
+    :title="ctaBlock?.properties?.title"
+    :subtitle="ctaBlock?.properties?.subtitle"
+    :button="ctaBlock?.properties?.button?.[0]"
   />
 </template>

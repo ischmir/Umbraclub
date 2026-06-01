@@ -8,14 +8,14 @@ const findSettings = (data: any) =>
 const identity = computed(() => findSettings(identityData.value))
 const navigation = computed(() => findSettings(navigationData.value))
 
-const logoText = computed(() => identity.value?.logoText)
+const logoText = computed(() => identity.value?.companyName)
 const navItems = computed(() => navigation.value?.headerNavigation ?? [])
 const footerItems = computed(() => navigation.value?.footerNavigation ?? [])
 </script>
 
 <template>
   <div class="layout">
-    <LayoutNavBar :logo-text="logoText" :nav-items="navItems" />
+    <LayoutNavbar :logo-text="logoText" :nav-items="navItems" />
     <main class="layout__main">
       <slot />
     </main>

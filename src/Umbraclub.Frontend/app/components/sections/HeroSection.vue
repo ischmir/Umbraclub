@@ -41,6 +41,8 @@ const imageSrc = computed(() => props.image ?? '/Umbraco-Patterns_Blue_Full.png'
         padding: 1rem;
     }
 
+    // ─── Content ────────────────────────────────────────────────────────────────
+
     &__content {
         background-color: $color-overlay;
         background-size: cover;
@@ -51,6 +53,14 @@ const imageSrc = computed(() => props.image ?? '/Umbraco-Patterns_Blue_Full.png'
         min-height: fit-content;
         display: flex;
         align-items: center;
+
+        @media (min-width: $breakpoint-md) {
+            height: fit-content;
+        }
+
+        @media (min-width: $breakpoint-lg) {
+            height: inherit;
+        }
     }
 
     &__content-container {
@@ -58,7 +68,22 @@ const imageSrc = computed(() => props.image ?? '/Umbraco-Patterns_Blue_Full.png'
         display: flex;
         flex-direction: column-reverse;
         align-items: center;
+
+        @media (min-width: $breakpoint-md) {
+            padding: 3rem 1.5rem 2rem;
+            flex-direction: row;
+        }
+
+        @media (min-width: $breakpoint-lg) {
+            padding: 3rem;
+        }
+
+        @media (min-width: $breakpoint-2xl) {
+            padding: 6rem;
+        }
     }
+
+    // ─── Columns ────────────────────────────────────────────────────────────────
 
     &__content-left {
         flex: 1;
@@ -71,47 +96,6 @@ const imageSrc = computed(() => props.image ?? '/Umbraco-Patterns_Blue_Full.png'
 
     &__subtitle {
         color: $primary-font-color;
-    }
-}
-
-@media (min-width: $breakpoint-md) {
-    .hero-section {
-        &__content {
-            height: fit-content;
-        }
-
-        &__content-container {
-            padding: 3rem 1.5rem 2rem;
-            flex-direction: row;
-        }
-    }
-}
-
-@media (min-width: $breakpoint-lg) {
-    .hero-section {
-        &__content {
-            height: inherit;
-        }
-
-        &__content-container {
-            padding: 3rem;
-        }
-    }
-}
-
-@media (min-width: $breakpoint-xl) {
-    .hero-section {
-        &__content-container {
-            padding: 3rem;
-        }
-    }
-}
-
-@media (min-width: $breakpoint-2xl) {
-    .hero-section {
-        &__content-container {
-            padding: 6rem;
-        }
     }
 }
 </style>

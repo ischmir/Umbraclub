@@ -23,35 +23,11 @@ export default defineEventHandler(async (event) => {
                     items {
                       content {
                         contentType
-                        ... on CardsSectionInline {
+                        ... on ImageAndTextSection {
                           id
                           properties {
                             title
-                            subtitle
-                            cardOneTitle
-                            cardOneSubtitle
-                            cardOneButton {
-                              title
-                              url
-                              target
-                              linkType
-                            }
-                            cardTwoTitle
-                            cardTwoSubtitle
-                            cardTwoButton {
-                              title
-                              url
-                              target
-                              linkType
-                            }
-                            cardThreeTitle
-                            cardThreeSubtitle
-                            cardThreeButton {
-                              title
-                              url
-                              target
-                              linkType
-                            }
+                            bodytext
                           }
                         }
                       }
@@ -67,7 +43,7 @@ export default defineEventHandler(async (event) => {
   } catch (err: any) {
     throw createError({
       statusCode: err.statusCode ?? 502,
-      statusMessage: err.message ?? 'Failed to fetch cards from Compose',
+      statusMessage: err.message ?? 'Failed to fetch image and text from Compose',
     })
   }
 })
